@@ -1,2 +1,2 @@
-# Video-of-a-gym-math-Temporal-Action-Localization
+# gymVideo-Temporal-Action-Localization
 Fine-Gym-Temproal-Action-Localization
