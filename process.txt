@@ -1,0 +1,39 @@
+# 가상 환경
+* 가상 환경 생성 
+python -m venv --system-site-packages new_env --without-pip
+* 가상 환경 실행
+source /home/work/TAL_FineGym/new_env/bin/activate
+
+# 데이터 생성
+1. FineGymData.py    / 유튜브에서 동영상 다운 및 label 다운
+2. VideoToImage.py   / 다운받은 영상을 이미지화
+3. VideoToAudio.py   / 비디오(mp4) -> 오디오(wav)
+4. FeaturesRGB.py    / 이미지를 I3D feaures로 변환 npy (length, 2048)
+* pip install natsort
+5. FeautresAudio.py  / 오디오를 VGGish features로 변환 npy (length, 128)
+6. LabelChange.py    / FineGym라벨을 Muses model에 돌리기 적합한 annotation으로 변환
+
+# First-stage
+1. proposal_generation.py / 후보 proposal추출, positive : negative = 1:1로 구성하며, pkl로 저장
+2. main.py                / 추출한 proposal을 통해서 특정 proposal이 positive or negative인지 판단하는 classifier train
+3. proposal_inference.py  / 피쳐가 들어왔을 경우 후보 proposal을 추출하고 위에서 학습한 모델을 통해 proposal을 selective하고 
+                            NMS를 통해 최종 후보 proposal 100개를 추출하여 txt파일에 저장 
+
+# Second-stage (Muses model)
+1. 
+
+
+
+# Future-Work
+1. RGB + AUDIO data fusion method
+2. image_diff data extraction
+
+ 
+ # Muses 실행 방식
+cd /home/work/TAL_FineGym/AVfusion/MUSES
+pip install -r requirements.txt
+python setup.py develop
+
+# muses module
+pip install terminaltables
+cd ./libs/utils; python setup.py install; cd ../..
